@@ -51,11 +51,11 @@
 
 2. FBB Attack Score : Table 7, 10
     - FBB Attack Roc Auc scores of the trained model are printed.
+    ```
+    example : 'python test_fbb.py --data --GPU_NUM --file --subopt'
 
-```
-example : 'sh train.sh score adult 0'
-
-first option : test type  [score(check model score), distplot(draw real-fake distance distribution), fbb(fbb attack score)]
-second option : data [adult, news]
-third option : GPU number to use <int>
-```
+    data: dataset name
+    GPU_NUM: GPU number to use
+    file: file name of model to use
+    subopt: return subopt fbb result
+    ```
