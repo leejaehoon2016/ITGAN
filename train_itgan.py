@@ -163,21 +163,6 @@ class AEGANSynthesizer(BaseSynthesizer):
         std_z = mean_z + 1
 
         for i in range(self.epochs):
-            stop_flag = False
-
-            for check_file in os.listdir("check_folder"):
-                try:
-                    check_filea, check_fileb = check_file.split("_")
-                    if check_filea == self.data_name and check_fileb == str(self.likelihood_coef):
-                        stop_flag = True
-                        break
-                except:
-                    continue
-                    
-            if stop_flag:
-                print("stop", self.data_name + "_" + self.test_name)
-                break
-            
             for id_, data in enumerate(loader): 
                 iter += 1
 
@@ -463,7 +448,7 @@ if __name__ == "__main__":
     total_deriv = None # int_t ||df/dt||^2 <float, None>
     directional_penalty = None  # int_t ||(df/dx)^T f||^2 <float, None>
     ################################################ Default Value #######################################################
-    
+    # python train_itgan.py --data --random_num --GPU_NUM --emb_dim --en_dim --d_dim --d_dropout --d_leaky --layer_type --hdim_factor --nhidden --likelihood_coef --gt --dt --lt --kinetic
     parser = argparse.ArgumentParser('ITGAN')
     parser.add_argument('--data', type=str, default = 'adult')
     parser.add_argument('--random_num', type=int, default = 777)
@@ -476,15 +461,19 @@ if __name__ == "__main__":
 
     parser.add_argument('--d_dropout', type=float, default= 0.5) # a
     parser.add_argument('--d_leaky', type=float, default=0.2) # b
-
+    
     parser.add_argument('--layer_type', type=str, default="blend") # blend[M_i(z,t) = t], simblenddiv1[M_i(z,t) = sigmoid(FC(z⊕t))]
-    parser.add_argument('--hdim_factor', type=float, default=1) # M
+    parser.add_argument('--hdim_factor', type=float, default=1.) # M
     parser.add_argument('--nhidden', type=int, default = 3) # K
     parser.add_argument('--likelihood_coef', type=float, default=0) # gamma
     parser.add_argument('--gt', type=int, default = 1) # period_G
     parser.add_argument('--dt', type=int, default = 1) # period_D
     parser.add_argument('--lt', type=int, default = 6) # period_L
+
     parser.add_argument('--kinetic', type=float, default = 1.)  # kinetic regularizer coef
+    parser.add_argument('--kinetic_every_learn', type=int, default = 0) # if 0 apply kinetic regularizer every G likelihood training, else every all G training
+    
+    
 
 
     arg_of_parser = parser.parse_args()
@@ -507,6 +496,7 @@ if __name__ == "__main__":
     D_learning_term = arg_of_parser.dt
     likelihood_learn_term = arg_of_parser.lt
     kinetic_energy = jacobian_norm2 = arg_of_parser.kinetic
+    kinetic_learn_every_G_learn = arg_of_parser.kinetic_every_learn
     
     test_name = ("_".join([str(i) for i in vars(arg_of_parser).values() if str(i) != data])).replace(" ", "")
     

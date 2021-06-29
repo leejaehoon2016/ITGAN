@@ -1,53 +1,55 @@
-# invertible GAN
+# Invertible Table GAN
 ## 1. Requirement
 - python version : Python 3.7.7
 - package information : requirements.txt
 
 ## 2. Train
-1. train base model for '5.2. Experimental Results'
+1. train base model
     ```
-    example : 'sh train_base_main.sh veegan adult 1'
+    example : 'python train_base{num}_{model} --data --random_num --test_name --GPU_NUM'
 
-    first option : model [identity, privbn, clbn, independent, uniform, ctgan, medgan, tablegan, tvae, veegan]
-    second option : data [adult, news]
-    third option : GPU number to use <int>
+    {num}, {model}: each model's number, [identity, privbn, clbn, independent, uniform, ctgan, medgan, tablegan, tvae, veegan]
+
+    data: dataset name <str>
+    random_num: random_seed to use <int>
+    test_name: the name of a file to be saved <str>
+    GPU_NUM: GPU number to use (for base5~9) <int>
     ```
-2. train iGAN model for '5.2. Experimental Results'
+2. train ITGAN model
     ```
-    example : 'sh train_igan_main.sh adult L 1'
+    example : 'python train_itgan.py --data --random_num --GPU_NUM --emb_dim --en_dim --d_dim --d_dropout --d_leaky --layer_type --hdim_factor --nhidden --likelihood_coef --gt --dt --lt --kinetic --kinetic_every_learn'
 
-    first option : data [adult, news]
-    second option : likelihood coef [L(Increase NLL), Q(Decrease NLL), 0(Only GAN)]
-    third option : GPU number to use <int>
+    data: dataset name
+    random_num: random_seed to use
+    GPU_NUM: GPU number to use
+    emb_dim: $dim(h)$
+    en_dim: $n_{e(r)}$ = 2 -> "256,128", 3 -> "512,256,128" 
+    d_dim: $n_d$ = 2 -> "256,256", 3 -> "256,256,256" 
+    d_dropout: a
+    d_leaky: b
+    layer_type: $blend[M_i(z,t) = t], simblenddiv1[M_i(z,t) = sigmoid(FC(z⊕t))]$
+    hdim_factor: M
+    nhidden: K
+    likelihood_coef: $\gamma$
+    gt: $period_G$
+    dt: $period_D$
+    lt: $period_L$
+    kinetic: kinetic regularizer coef
+    kinetic_every_learn: if 0 apply kinetic regularizer every G likelihood training, else every all G training
+    
+    the name of a file to be saved is combination of each parameter
     ```
-3. train iGAN model for '5.4. Sensitivity Analyses'
-    - Sensitivity for $\gamma$
-        ```
-        example : 'sh train_igan_sens_coef.sh adult 0.05 1'
-
-        first option : data [adult, news]
-        second option : likelihood coef <float>
-        third option : GPU number to use <int>
-        ```
-    - Sensitivity for dim($h$)
-        ```
-        example : 'sh train_igan_sens_emb.sh adult 128 1'
-
-        first option : data [adult, news]
-        second option : embedding size <int>
-        third option : GPU number to use <int>
-        ```
+    All parameter (except kinetic, kinetic_every_learn) is in Appendix D.
+    kinetic: 0.1 for ITGAN(Q) of census and ITGAN(Q), ITGAN(L) for cabs, 1.0 for others  
+    kinetic_every_learn: 1 for census, 0 for others
 
 ## 3. Test
-1. Check Model Score : Table1 ~ 22 
-    - Only the trained model scores are printed
-    - Also, Check the result with tensorboard log 'last_result/runs/'
-    
-2. Draw Real-Fake Distance Distribution : Figure3
-    - You can draw the plot after igan, igan(L), igan(Q) are trained.
-    - The figure will be saved in 'dist_info/'
+1. Check Model Score : Table 1, 2, 3, 4, 5, 6, 8, 9
+    - You can check the result in json file of last_result/score_info/{data} 
+    - For Training Model(base5~9, ITGAN), the value of the key "best" is the model score
+    - Also, Check the result with tensorboard log in 'last_result/runs/{data}'
 
-3. FBB Attack Score : Table23
+2. FBB Attack Score : Table 7, 10
     - FBB Attack Roc Auc scores of the trained model are printed.
 
 ```

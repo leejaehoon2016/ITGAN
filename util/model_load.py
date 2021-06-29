@@ -1,14 +1,19 @@
 import os,sys, torch
-from iGAN import AEGANSynthesizer
-from clbn import CLBNSynthesizer
-from ctgan import CTGANSynthesizer
-from independent import IndependentSynthesizer
-from medgan  import MedganSynthesizer
-from privbn import PrivBNSynthesizer
-from tablegan import TableganSynthesizer
-from tvae import TVAESynthesizer
-from uniform import UniformSynthesizer
-from veegan import VEEGANSynthesizer
+from train_itgan import AEGANSynthesizer
+from train_base1_clbn import CLBNSynthesizer
+from train_base2_independent import IndependentSynthesizer
+from train_base3_privbn import PrivBNSynthesizer
+from train_base4_uniform import UniformSynthesizer
+from train_base5_tvae import TVAESynthesizer
+from train_base6_ctgan import CTGANSynthesizer
+from train_base7_tablegan import TableganSynthesizer
+from train_base8_veegan import VEEGANSynthesizer
+from train_base9_medgan  import MedganSynthesizer
+
+
+
+
+
 
 synthesizer = {
     "CLBNSynthesizer" : CLBNSynthesizer,
