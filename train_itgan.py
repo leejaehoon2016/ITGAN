@@ -106,7 +106,7 @@ class AEGANSynthesizer(BaseSynthesizer):
         self.ae_learning_term = ae_learning_term ; self.ae_learning_term_g = ae_learning_term_g
 
         self.rtol=rtol; self.atol=atol; self.batch_size=batch_size; self.epochs=epochs; self.random_num=random_num ; self.save_loc = save_loc
-        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        self.device = torch.device(f'cuda:{GPU_NUM}' if torch.cuda.is_available() else 'cpu')
         self.GPU_NUM = GPU_NUM ; self.save_arg = save_arg ; self.data_name = data_name ; self.test_name = test_name
 
         if train:

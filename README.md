@@ -2,6 +2,11 @@
 ## 1. Requirement
 - python version : Python 3.7.7
 - package information : requirements.txt
+- prepare dataset(unzip the file)
+    ```
+    tar -zxvf data.tar
+    ```
+  
 
 ## 2. Train
 1. train base model

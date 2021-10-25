@@ -192,7 +192,7 @@ class TableganSynthesizer(BaseSynthesizer):
         classifier.apply(weights_init)
 
         best_model_dict = model_save_dict(self.meta["problem_type"])
-        every_model_dict = {"name": "TableganSynthesizer", "arg" : self.save_arg, "model": [0]}
+        every_model_dict = {"name": "TableganSynthesizer", "arg" : self.save_arg, "model": {}}
         track_score_dict, save_score_dict = {}, {}
         iter = 0
 

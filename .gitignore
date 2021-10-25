@@ -1,28 +1,6 @@
-
-run_igan_[0-9].sh
-run_igan_[0-9][0-9].sh
-settings.json
+last_result
 data
-intrusion.json
-intrusion.npz
-covtype.json
-covtype.npz
-*.out
-*.csv
-base_model/
-__pypackages__/
-runs/
-result/
-save_model/
-score_info/
-param/
-__pycache__
-j_experiments/
-jaehoontest/
-last_result/
-before_model_test/
-
-
+__privbn_tmp/
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python
 

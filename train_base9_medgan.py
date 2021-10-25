@@ -207,7 +207,7 @@ class MedganSynthesizer(BaseSynthesizer):
         optimizerD = Adam(discriminator.parameters(), weight_decay=self.l2scale)
 
         best_model_dict = model_save_dict(self.meta["problem_type"])
-        every_model_dict = {"name": "MedganSynthesizer", "arg" : self.save_arg, "model": [0]}
+        every_model_dict = {"name": "MedganSynthesizer", "arg" : self.save_arg, "model": {}}
         track_score_dict, save_score_dict = {}, {}
         iter = 0
         mean = torch.zeros(self.batch_size, self.random_dim, device=self.device)
