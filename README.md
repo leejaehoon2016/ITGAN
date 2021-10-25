@@ -1,14 +1,21 @@
-# Invertible Table GAN
-## 1. Requirement
+# Invertible Tabular GANs: Killing Two Birds with OneStone for Tabular Data Synthesis(Neurips 2021)
+
+This repository is the official implementation of [Invertible Tabular GANs](https://arxiv.org). 
+
+![model](picture/model.png)
+
+## 1. Requirements
 - python version : Python 3.7.7
 - package information : requirements.txt
+    ```setup
+    pip install -r requirements.txt
+    ```
 - prepare dataset(unzip the file)
     ```
     tar -zxvf data.tar
     ```
-  
 
-## 2. Train
+## 2. Training
 1. train base model
     ```
     example : 'python train_base{num}_{model} --data --random_num --test_name --GPU_NUM'
@@ -48,7 +55,8 @@
     kinetic: 0.1 for ITGAN(Q) of census and ITGAN(Q), ITGAN(L) for cabs, 1.0 for others  
     kinetic_every_learn: 1 for census, 0 for others
 
-## 3. Test
+## 3. Evaluation
+
 1. Check Model Score : Table 1, 2, 3, 4, 5, 6, 8, 9
     - You can check the result in json file of last_result/score_info/{data} 
     - For Training Model(base5~9, ITGAN), the value of the key "best" is the model score
