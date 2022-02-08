@@ -1,6 +1,6 @@
 # Invertible Tabular GANs: Killing Two Birds with OneStone for Tabular Data Synthesis(Neurips 2021)
 
-This repository is the official implementation of [Invertible Tabular GANs](https://arxiv.org). 
+This repository is the official implementation of [Invertible Tabular GANs](https://openreview.net/forum?id=tvDBe6K8L5o). 
 
 ![model](picture/model.png)
 
@@ -12,6 +12,7 @@ This repository is the official implementation of [Invertible Tabular GANs](http
     ```
 - prepare dataset(unzip the file)
     ```
+    cd util
     tar -zxvf data.tar
     ```
 
