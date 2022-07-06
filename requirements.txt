@@ -5,4 +5,4 @@ scipy==1.5.2
 seaborn==0.11.1
 tensorboard==2.2.1
 tensorboardX==2.1
-numpy==1.19.1
+numpy==1.22.0
