@@ -7,7 +7,7 @@
 1. train ITGAN model
     ```
     example : 'python train_itgan.py --data --random_num --GPU_NUM --emb_dim --en_dim --d_dim --d_dropout --d_leaky --layer_type --hdim_factor --nhidden --likelihood_coef --gt --dt --lt --kinetic --kinetic_every_learn'
-
+    
     data: dataset name
     random_num: random_seed to use
     GPU_NUM: GPU number to use
@@ -42,7 +42,7 @@
     - FBB Attack Roc Auc scores of the trained model are printed.
     ```
     example : 'python test_fbb.py --data --GPU_NUM --file --subopt'
-
+    
     data: dataset name
     GPU_NUM: GPU number to use
     file: file name of model to use
@@ -52,6 +52,6 @@
 ## 4. License
 
 Copyright (C) 2023 Samsung SDS Co., Ltd. All rights reserved.
-Released under the Samsung SDS source code license.
-For details on the scope of licenses, please refer to the License.md file (https://github.com/leejaehoon2016/ITGAN/License.md).
+Released under the Samsung SDS Public License V1.0.
+For details on the scope of licenses, please refer to the License.md file (https://github.com/leejaehoon2016/ITGAN/blob/main/License.md).
 
